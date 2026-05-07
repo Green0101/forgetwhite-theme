@@ -1,0 +1,41 @@
+<div class="section">
+  <div class="section-container">
+    <div class="section-header">
+      <h1 class="section-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <p class="section-subtitle">{{ collection.description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="products-grid">
+      {% for product in collection.products %}
+        {% assign external_id = product.metafields.custom.external_id | default: product.id %}
+        <div class="product-card">
+          <div class="product-image">
+            {% if product.featured_image != blank %}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.title }}</h3>
+            <div class="product-price-row">
+              {% if product.compare_at_price > product.price %}
+                <span class="price-old">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+              <span class="price-new">{{ product.price | money }}</span>
+            </div>
+            <a href="#"
+               class="btn-buy"
+               data-affiliate-buy="true"
+               data-external-id="{{ external_id }}"
+               data-affiliate="{{ settings.affiliate_code }}"
+               data-affiliate-url="{{ settings.affiliate_base_url }}">
+              Buy Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

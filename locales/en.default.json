@@ -1,0 +1,43 @@
+{
+  "general": {
+    "shop": {
+      "title": "Forget White UK"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for doesn't exist.",
+      "link": "Continue shopping"
+    },
+    "cart": {
+      "view_cart": "View cart",
+      "checkout": "Continue to secure checkout",
+      "empty": "Your cart is empty"
+    }
+  },
+  "products": {
+    "product": {
+      "buy_now": "Buy Now",
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "save": "Save",
+      "from": "From",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    },
+    "footer": {
+      "follow_us": "Follow us",
+      "shop": "Shop",
+      "support": "Support",
+      "legal": "Legal"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Forget White UK",
+    "theme_version": "1.0.0",
+    "theme_author": "Forget White UK Affiliate",
+    "theme_documentation_url": "https://github.com/your-username/forgetwhite-shopify-theme",
+    "theme_support_url": "https://github.com/your-username/forgetwhite-shopify-theme/issues"
+  },
+  {
+    "name": "Affiliate Configuration",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Affiliate Settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "These settings control where Buy Now buttons redirect customers."
+      },
+      {
+        "type": "text",
+        "id": "affiliate_code",
+        "label": "Affiliate Code",
+        "default": "4826953",
+        "info": "Your unique affiliate code that gets appended to redirect URLs"
+      },
+      {
+        "type": "url",
+        "id": "affiliate_base_url",
+        "label": "Affiliate Cart URL",
+        "default": "https://forgetwhite.com/cart/",
+        "info": "Base URL where customers will be redirected to complete purchase"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Page Background",
+        "default": "#87CEEB",
+        "info": "Sky blue background as per brief"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Primary Text",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent / Buttons",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "price_color",
+        "label": "Price Color",
+        "default": "#1a1a1a"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Custom Logo",
+        "info": "Upload a logo. Leave empty to use text logo."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Recommended size: 32x32px"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  }
+]

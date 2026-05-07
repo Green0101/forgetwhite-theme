@@ -1,0 +1,151 @@
+<section class="hero" id="home">
+  <div class="hero-container">
+    <div class="hero-content">
+      {% if section.settings.show_badge %}
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>{{ section.settings.badge_text }}</span>
+        </div>
+      {% endif %}
+
+      <h1>{{ section.settings.heading }}</h1>
+      <p class="hero-text">{{ section.settings.subheading }}</p>
+
+      <div class="cta-group">
+        <a href="{{ section.settings.cta_primary_url }}" class="btn-primary">
+          {{ section.settings.cta_primary_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        {% if section.settings.cta_secondary_text != blank %}
+          <a href="{{ section.settings.cta_secondary_url }}" class="btn-secondary">{{ section.settings.cta_secondary_text }}</a>
+        {% endif %}
+      </div>
+
+      <div class="hero-stats">
+        {% for block in section.blocks %}
+          {% if block.type == 'stat' %}
+            <div class="stat" {{ block.shopify_attributes }}>
+              <div class="num">{{ block.settings.value }}</div>
+              <div class="lbl">{{ block.settings.label }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="hero-image">
+      {% if section.settings.hero_image != blank %}
+        <img src="{{ section.settings.hero_image | image_url: width: 1200 }}" alt="{{ section.settings.heading }}" loading="eager">
+      {% elsif section.settings.default_image_asset != blank %}
+        <img src="{{ section.settings.default_image_asset | asset_url }}" alt="{{ section.settings.heading }}" loading="eager">
+      {% else %}
+        <div style="width: 100%; aspect-ratio: 1.2; background: rgba(255,255,255,0.5); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #555;">Upload hero image</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "UK's #1 Anti-Grey Treatment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stop Greying. Start Living."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The revolutionary phytokeratine treatment that reverses grey hair naturally — no chemicals, no dyes, just real results in 60 days."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "default_image_asset",
+      "label": "Default asset filename",
+      "info": "Used when no image is uploaded. E.g., hero-banner.png",
+      "default": "hero-banner.png"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "Button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Button text",
+      "default": "How It Works"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy customers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "50K+", "label": "Happy customers" } },
+        { "type": "stat", "settings": { "value": "98%", "label": "Success rate" } },
+        { "type": "stat", "settings": { "value": "60", "label": "Days to results" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

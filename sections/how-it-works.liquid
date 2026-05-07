@@ -1,0 +1,52 @@
+<section class="section" id="how">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      <p class="section-subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="steps-grid">
+      {% for block in section.blocks %}
+        <div class="step" {{ block.shopify_attributes }}>
+          <div class="step-num">{{ forloop.index }}</div>
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Simple Process" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How It Works" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Four easy steps to your natural hair colour, restored." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Apply Daily" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "5-10 drops massaged into the scalp twice a day." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Apply Daily", "description": "5-10 drops of the treatment massaged into the scalp twice a day." } },
+        { "type": "step", "settings": { "title": "Wait 30 Days", "description": "The phytokeratine begins reactivating your hair's pigment cells." } },
+        { "type": "step", "settings": { "title": "See First Results", "description": "By week 4-6 you'll notice darker roots and reduced grey hairs." } },
+        { "type": "step", "settings": { "title": "Full Restoration", "description": "After 60-90 days, your natural hair colour is fully restored." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

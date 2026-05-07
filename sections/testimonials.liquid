@@ -1,0 +1,87 @@
+<section class="section bg-soft" id="testimonials">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      <p class="section-subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="testimonials-grid">
+      {% for block in section.blocks %}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-stars">★★★★★</div>
+          <h4 class="testimonial-title">{{ block.settings.title }}</h4>
+          <p class="testimonial-text">{{ block.settings.text }}</p>
+
+          {% if block.settings.show_before_after %}
+            <div class="before-after">
+              {% if block.settings.before_image != blank %}
+                <img src="{{ block.settings.before_image | image_url: width: 400 }}" class="before-after-img" data-label="BEFORE" alt="Before" style="width:100%; height:100%; object-fit:cover; padding:0;">
+              {% else %}
+                <div class="before-after-img before" data-label="BEFORE">{{ block.settings.before_label }}</div>
+              {% endif %}
+              {% if block.settings.after_image != blank %}
+                <img src="{{ block.settings.after_image | image_url: width: 400 }}" class="before-after-img" data-label="AFTER" alt="After" style="width:100%; height:100%; object-fit:cover; padding:0;">
+              {% else %}
+                <div class="before-after-img after" data-label="AFTER">{{ block.settings.after_label }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="testimonial-author">
+            <div class="author-avatar">{{ block.settings.author_initials }}</div>
+            <div class="author-info">
+              <div class="author-name">{{ block.settings.author_name }}</div>
+              <div class="author-meta">{{ block.settings.author_meta }}</div>
+            </div>
+            {% if block.settings.verified %}
+              <span class="verified-badge">✓ VERIFIED</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real Stories" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted By Thousands Across The UK" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Real customers, real before & after results." }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Life-changing results" },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "After 8 weeks my greys are visibly darker..." },
+        { "type": "header", "content": "Before & After" },
+        { "type": "checkbox", "id": "show_before_after", "label": "Show before/after", "default": true },
+        { "type": "image_picker", "id": "before_image", "label": "Before image (optional)" },
+        { "type": "text", "id": "before_label", "label": "Before label (if no image)", "default": "Week 1" },
+        { "type": "image_picker", "id": "after_image", "label": "After image (optional)" },
+        { "type": "text", "id": "after_label", "label": "After label (if no image)", "default": "Week 8" },
+        { "type": "header", "content": "Author" },
+        { "type": "text", "id": "author_initials", "label": "Initials (avatar)", "default": "JM" },
+        { "type": "text", "id": "author_name", "label": "Name", "default": "James M." },
+        { "type": "text", "id": "author_meta", "label": "Meta info", "default": "London · Used Miracle Set" },
+        { "type": "checkbox", "id": "verified", "label": "Verified badge", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "title": "Life-changing results in 8 weeks", "text": "I was sceptical at first, but after 2 months my greys at the temples are visibly darker.", "before_label": "Week 1", "after_label": "Week 8", "author_initials": "JM", "author_name": "James M.", "author_meta": "London · Miracle Set" } },
+        { "type": "testimonial", "settings": { "title": "Worth every penny", "text": "The first thing that actually works without ruining my hair. Brilliant product.", "before_label": "Day 1", "after_label": "Day 60", "author_initials": "SH", "author_name": "Sarah H.", "author_meta": "Manchester · Forte Set" } },
+        { "type": "testimonial", "settings": { "title": "My confidence is back", "text": "Three months in and my natural brown is properly back. UK delivery was fast.", "before_label": "Start", "after_label": "3 months", "author_initials": "DR", "author_name": "David R.", "author_meta": "Birmingham · Phytokeratine" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

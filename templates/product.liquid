@@ -1,0 +1,38 @@
+<div class="section">
+  <div class="section-container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div class="product-image" style="height: 500px; border-radius: 20px;">
+        {% if product.featured_image != blank %}
+          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+        {% endif %}
+      </div>
+      <div>
+        <h1 class="product-name" style="font-size: 36px;">{{ product.title }}</h1>
+        <div class="product-rating">
+          <span class="stars">★★★★★</span>
+          <span class="review-count">(Verified reviews)</span>
+        </div>
+        <div class="product-price-row" style="margin: 24px 0;">
+          {% if product.compare_at_price > product.price %}
+            <span class="price-old">{{ product.compare_at_price | money }}</span>
+          {% endif %}
+          <span class="price-new">{{ product.price | money }}</span>
+        </div>
+        <div class="product-description" style="font-size: 16px; margin-bottom: 32px;">
+          {{ product.description }}
+        </div>
+        {% assign external_id = product.metafields.custom.external_id | default: product.id %}
+        <a href="#"
+           class="btn-buy"
+           data-affiliate-buy="true"
+           data-external-id="{{ external_id }}"
+           data-affiliate="{{ settings.affiliate_code }}"
+           data-affiliate-url="{{ settings.affiliate_base_url }}"
+           style="max-width: 320px;">
+          Buy Now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

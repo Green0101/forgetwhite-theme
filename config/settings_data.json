@@ -1,0 +1,20 @@
+{
+  "current": {
+    "affiliate_code": "4826953",
+    "affiliate_base_url": "https://forgetwhite.com/cart/",
+    "bg_color": "#87CEEB",
+    "text_color": "#1a1a1a",
+    "accent_color": "#1a1a1a",
+    "price_color": "#1a1a1a"
+  },
+  "presets": {
+    "Default": {
+      "affiliate_code": "4826953",
+      "affiliate_base_url": "https://forgetwhite.com/cart/",
+      "bg_color": "#87CEEB",
+      "text_color": "#1a1a1a",
+      "accent_color": "#1a1a1a",
+      "price_color": "#1a1a1a"
+    }
+  }
+}

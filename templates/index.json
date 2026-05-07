@@ -1,0 +1,169 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "default_image_asset": "hero-banner.png"
+      },
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "value": "50K+", "label": "Happy customers" } },
+        "stat2": { "type": "stat", "settings": { "value": "98%", "label": "Success rate" } },
+        "stat3": { "type": "stat", "settings": { "value": "60", "label": "Days to results" } }
+      },
+      "block_order": ["stat1", "stat2", "stat3"]
+    },
+    "trust-bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "trust_item", "settings": { "icon": "🚚", "title": "Free UK Delivery", "subtitle": "On orders over £50" } },
+        "t2": { "type": "trust_item", "settings": { "icon": "🛡️", "title": "30-Day Guarantee", "subtitle": "Money-back promise" } },
+        "t3": { "type": "trust_item", "settings": { "icon": "🌿", "title": "100% Natural", "subtitle": "No harsh chemicals" } },
+        "t4": { "type": "trust_item", "settings": { "icon": "🔒", "title": "Secure Checkout", "subtitle": "SSL encrypted" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    },
+    "products": {
+      "type": "affiliate-products",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "external_product_id": "9823",
+            "default_image_asset": "product-phytokeratine.png",
+            "badge_text": "SALE",
+            "badge_style": "sale",
+            "discount_text": "-25%",
+            "category": "HAIR CARE · STARTER",
+            "name": "Phytokeratine Set",
+            "description": "The original formula — perfect introduction. 2 bottles, 60-day supply.",
+            "show_rating": true,
+            "review_count": "2,341",
+            "features": "2 × 50ml bottles | Natural phytokeratine formula | Suitable for all hair types",
+            "price_old": "79.99",
+            "price_new": "59.99",
+            "save_text": "20"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "external_product_id": "19388",
+            "external_image_url": "https://forgetwhite.com/wp-content/uploads/Pachetul-Combo-FW-600x600.jpg",
+            "default_image_asset": "product-miracle.png",
+            "featured": true,
+            "badge_text": "★ BESTSELLER",
+            "badge_style": "bestseller",
+            "discount_text": "-30%",
+            "category": "HAIR CARE · COMPLETE",
+            "name": "Miracle Set",
+            "description": "The complete treatment — original + Forte combined. Maximum results.",
+            "show_rating": true,
+            "review_count": "4,892",
+            "features": "4 × 50ml bottles | Original + Forte combination | 120-day complete treatment | Best value pack",
+            "price_old": "179.99",
+            "price_new": "124.99",
+            "save_text": "55"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "external_product_id": "16668",
+            "external_image_url": "https://forgetwhite.com/wp-content/uploads/produse-cutie-forget-white-forte2-600x600.jpg",
+            "default_image_asset": "product-forte.png",
+            "badge_text": "PREMIUM",
+            "badge_style": "gold",
+            "discount_text": "-25%",
+            "category": "HAIR CARE · ADVANCED",
+            "name": "Forte Set",
+            "description": "Maximum strength formula for stubborn greys. Advanced results in 45 days.",
+            "show_rating": true,
+            "review_count": "3,156",
+            "features": "2 × 50ml bottles (Forte) | Concentrated formula | Premium gold gift box",
+            "price_old": "109.99",
+            "price_new": "82.99",
+            "save_text": "27"
+          }
+        },
+        "p4": {
+          "type": "product",
+          "settings": {
+            "external_product_id": "17936",
+            "external_image_url": "https://forgetwhite.com/wp-content/uploads/PdS-FW-Combo-en-600x600.png",
+            "badge_text": "BUSINESS",
+            "badge_style": "sale",
+            "discount_text": "",
+            "category": "BUSINESS OPPORTUNITY",
+            "name": "Starter Package",
+            "description": "Start your own journey as a partner. Includes everything you need to begin.",
+            "show_rating": false,
+            "review_count": "",
+            "features": "Complete starter kit | Partner training materials | Marketing resources",
+            "price_old": "",
+            "price_new": "124.99",
+            "save_text": ""
+          }
+        },
+        "p5": {
+          "type": "product",
+          "settings": {
+            "external_product_id": "16446",
+            "external_image_url": "https://forgetwhite.com/wp-content/uploads/RelaxMax-cover-2-600x600.jpg",
+            "badge_text": "-10% OFF",
+            "badge_style": "sale",
+            "discount_text": "-10%",
+            "category": "PERSONAL CARE",
+            "name": "RelaxMax",
+            "description": "Premium care and relaxation. Designed to complement your daily routine.",
+            "show_rating": true,
+            "review_count": "892",
+            "features": "Premium materials | Quality construction | Easy to use",
+            "price_old": "120.00",
+            "price_new": "109.99",
+            "save_text": "10"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5"]
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "🧬", "title": "Phytokeratine Technology", "description": "Plant-based keratin reactivates dormant melanocytes, restoring your hair's natural pigment from within." } },
+        "b2": { "type": "benefit", "settings": { "icon": "🌱", "title": "100% Natural Ingredients", "description": "Free from ammonia, peroxide, and harsh chemicals. Safe for daily use and all hair types." } },
+        "b3": { "type": "benefit", "settings": { "icon": "⏱️", "title": "Visible in 60 Days", "description": "Most customers see results within 4-8 weeks. Full treatment takes 60-90 days for permanent change." } }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Apply Daily", "description": "5-10 drops of the treatment massaged into the scalp twice a day." } },
+        "s2": { "type": "step", "settings": { "title": "Wait 30 Days", "description": "The phytokeratine begins reactivating your hair's pigment cells." } },
+        "s3": { "type": "step", "settings": { "title": "See First Results", "description": "By week 4-6 you'll notice darker roots and reduced grey hairs." } },
+        "s4": { "type": "step", "settings": { "title": "Full Restoration", "description": "After 60-90 days, your natural hair colour is fully restored." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "title": "Life-changing results in 8 weeks", "text": "After 2 months my greys at the temples are visibly darker. My wife noticed before I even told her I was using something.", "before_label": "Week 1", "after_label": "Week 8", "author_initials": "JM", "author_name": "James M.", "author_meta": "London · Used Miracle Set", "verified": true } },
+        "t2": { "type": "testimonial", "settings": { "title": "Worth every penny", "text": "The first thing that actually works without ruining my hair. Brilliant product.", "before_label": "Day 1", "after_label": "Day 60", "author_initials": "SH", "author_name": "Sarah H.", "author_meta": "Manchester · Used Forte Set", "verified": true } },
+        "t3": { "type": "testimonial", "settings": { "title": "My confidence is back", "text": "Three months in and my natural brown is properly back. The free UK delivery was super fast too.", "before_label": "Start", "after_label": "3 months", "author_initials": "DR", "author_name": "David R.", "author_meta": "Birmingham · Used Phytokeratine", "verified": true } }
+      },
+      "block_order": ["t1", "t2", "t3"]
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "f1": { "type": "faq", "settings": { "question": "How long until I see results?", "answer": "Most customers see noticeable changes within 4-6 weeks. Full results typically appear after 60-90 days of consistent daily use." } },
+        "f2": { "type": "faq", "settings": { "question": "Is it safe for daily use?", "answer": "Yes. Forget White is made from natural ingredients with no ammonia, peroxide, or harsh chemicals." } },
+        "f3": { "type": "faq", "settings": { "question": "Do you deliver across the UK?", "answer": "Yes. Standard delivery 2-4 working days. Orders over £50 ship free." } },
+        "f4": { "type": "faq", "settings": { "question": "What if it doesn't work for me?", "answer": "30-day money-back guarantee. Return for a full refund — no questions asked." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
+    }
+  },
+  "order": ["hero", "trust-bar", "products", "benefits", "how-it-works", "testimonials", "faq"]
+}

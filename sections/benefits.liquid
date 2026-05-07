@@ -1,0 +1,85 @@
+<section class="section bg-soft">
+  <div class="section-container">
+    <div class="section-header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="section-subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="benefits-grid">
+      {% for block in section.blocks %}
+        <div class="benefit-card" {{ block.shopify_attributes }}>
+          <div class="benefit-icon">{{ block.settings.icon }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Science of Natural Restoration"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Backed by research, loved by thousands. Here's what makes Forget White different."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🧬"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Phytokeratine Technology"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Plant-based keratin reactivates dormant melanocytes, restoring your hair's natural pigment from within."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "🧬", "title": "Phytokeratine Technology", "description": "Plant-based keratin reactivates dormant melanocytes." } },
+        { "type": "benefit", "settings": { "icon": "🌱", "title": "100% Natural Ingredients", "description": "Free from ammonia, peroxide, and harsh chemicals." } },
+        { "type": "benefit", "settings": { "icon": "⏱️", "title": "Visible in 60 Days", "description": "Most customers see results within 4-8 weeks." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

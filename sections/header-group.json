@@ -1,0 +1,14 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "<p>🚚 <strong>FREE UK DELIVERY</strong> on all orders over £50 · 30-day money-back guarantee</p>"
+      }
+    }
+  },
+  "order": ["header"]
+}

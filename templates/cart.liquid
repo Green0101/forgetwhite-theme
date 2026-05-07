@@ -1,0 +1,190 @@
+<div class="section" style="padding-top: 60px; padding-bottom: 60px;">
+  <div class="section-container" style="max-width: 720px;">
+
+    <div class="section-header" style="margin-bottom: 30px;">
+      <span class="section-eyebrow">Almost There</span>
+      <h1 class="section-title">Review Your Order</h1>
+    </div>
+
+    <!-- Cart items rendered by JS from localStorage -->
+    <div id="cart-items-container" style="background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 24px;">
+      <div id="cart-empty-state" style="text-align: center; padding: 40px 20px; color: #555;">
+        <div style="font-size: 56px; margin-bottom: 16px; opacity: 0.3;">🛒</div>
+        <p style="font-size: 18px; margin-bottom: 24px;">Your cart is empty</p>
+        <a href="{{ routes.root_url }}" class="btn-primary" style="display: inline-flex;">Continue Shopping</a>
+      </div>
+      <div id="cart-items-list" style="display: none;"></div>
+    </div>
+
+    <!-- DISCLOSURE BOX -->
+    <div id="cart-disclosure" style="display: none; margin-bottom: 24px; padding: 20px 24px; background: #fff8e6; border: 1.5px solid #f59e0b; border-radius: 16px; color: #78350f;">
+      <div style="display: flex; align-items: center; gap: 8px; color: #92400e; font-weight: 700; margin-bottom: 8px; font-size: 14px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Before you continue
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; margin: 0;">
+        Payment will be processed on the secure Forget White site (Romania). Prices on the checkout page will be displayed in <strong>RON (Romanian Lei)</strong>. This does not change any of the terms promised to you above — UK delivery, 30-day money-back guarantee, and product specifications all remain as stated.
+      </p>
+    </div>
+
+    <!-- Total + Checkout button -->
+    <div id="cart-checkout-section" style="display: none; background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 20px; font-weight: 700;">
+        <span>Total</span>
+        <span id="cart-total">£0.00</span>
+      </div>
+      <a href="#" id="cart-checkout-btn" class="btn-primary" style="width: 100%; justify-content: center; padding: 18px;">
+        Continue to Secure Checkout
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <p style="font-size: 12px; color: #555; text-align: center; margin-top: 16px;">
+        You will be redirected to forgetwhite.com (Romania). Your affiliate code is automatically applied.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .cart-page-item {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+  }
+  .cart-page-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .cart-page-item:first-child { padding-top: 0; }
+  .cart-page-item img {
+    width: 90px; height: 90px;
+    object-fit: contain;
+    background: #f5f5f5;
+    border-radius: 12px;
+  }
+  .cart-page-item h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .cart-page-item .price {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .cart-page-item .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .cart-page-item .qty-control button {
+    background: #f0f0f0;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .cart-page-item .qty-control button:hover { background: #e0e0e0; }
+  .cart-page-item .qty-display {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .cart-page-item .remove-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    padding: 4px;
+  }
+</style>
+
+<script>
+(function() {
+  const AFFILIATE_CODE = '{{ settings.affiliate_code | default: "4826953" }}';
+  const AFFILIATE_BASE_URL = '{{ settings.affiliate_base_url | default: "https://forgetwhite.com/cart/" }}';
+
+  function loadCart() {
+    try {
+      return JSON.parse(localStorage.getItem('fw_cart') || '[]');
+    } catch (e) { return []; }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem('fw_cart', JSON.stringify(cart));
+  }
+
+  function updateQty(productId, delta) {
+    const cart = loadCart();
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
+    item.qty = Math.max(0, item.qty + delta);
+    if (item.qty === 0) {
+      saveCart(cart.filter(i => i.id !== productId));
+    } else {
+      saveCart(cart);
+    }
+    renderPage();
+  }
+
+  function removeItem(productId) {
+    saveCart(loadCart().filter(i => i.id !== productId));
+    renderPage();
+  }
+
+  window.cartUpdateQty = updateQty;
+  window.cartRemoveItem = removeItem;
+
+  function renderPage() {
+    const cart = loadCart();
+    const emptyState = document.getElementById('cart-empty-state');
+    const itemsList = document.getElementById('cart-items-list');
+    const disclosure = document.getElementById('cart-disclosure');
+    const checkoutSection = document.getElementById('cart-checkout-section');
+
+    if (cart.length === 0) {
+      emptyState.style.display = 'block';
+      itemsList.style.display = 'none';
+      disclosure.style.display = 'none';
+      checkoutSection.style.display = 'none';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    itemsList.style.display = 'block';
+    disclosure.style.display = 'block';
+    checkoutSection.style.display = 'block';
+
+    itemsList.innerHTML = cart.map(item => `
+      <div class="cart-page-item">
+        <img src="${item.image || ''}" alt="${item.name}">
+        <div>
+          <h4>${item.name}</h4>
+          <div class="price">£${(item.price * item.qty).toFixed(2)}</div>
+          <div class="qty-control">
+            <button onclick="cartUpdateQty('${item.id}', -1)" aria-label="Decrease">−</button>
+            <span class="qty-display">${item.qty}</span>
+            <button onclick="cartUpdateQty('${item.id}', 1)" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <button class="remove-btn" onclick="cartRemoveItem('${item.id}')" aria-label="Remove">×</button>
+      </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    document.getElementById('cart-total').textContent = '£' + total.toFixed(2);
+
+    // Build affiliate URL with all products and quantities
+    const ids = cart.flatMap(item => Array(item.qty).fill(item.id)).join(',');
+    document.getElementById('cart-checkout-btn').href =
+      `${AFFILIATE_BASE_URL}?add-to-cart=${ids}&ref=${AFFILIATE_CODE}`;
+  }
+
+  // Initial render
+  renderPage();
+})();
+</script>

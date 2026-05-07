@@ -1,0 +1,143 @@
+<section class="section" id="products">
+  <div class="section-container">
+    <div class="section-header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="section-subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="products-grid">
+      {% for block in section.blocks %}
+        <div class="product-card{% if block.settings.featured %} featured{% endif %}" {{ block.shopify_attributes }}>
+
+          {% if block.settings.badge_text != blank %}
+            <span class="product-badge {{ block.settings.badge_style }}">{{ block.settings.badge_text }}</span>
+          {% endif %}
+
+          {% if block.settings.discount_text != blank %}
+            <span class="product-discount">{{ block.settings.discount_text }}</span>
+          {% endif %}
+
+          {%- assign img_src = '' -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign img_src = block.settings.image | image_url: width: 600 -%}
+          {%- elsif block.settings.external_image_url != blank -%}
+            {%- assign img_src = block.settings.external_image_url -%}
+          {%- elsif block.settings.default_image_asset != blank -%}
+            {%- assign img_src = block.settings.default_image_asset | asset_url -%}
+          {%- endif -%}
+
+          <div class="product-image">
+            {% if img_src != blank %}
+              <img src="{{ img_src }}" alt="{{ block.settings.name }}" loading="lazy">
+            {% endif %}
+          </div>
+
+          <div class="product-info">
+            {% if block.settings.category != blank %}
+              <div class="product-category">{{ block.settings.category }}</div>
+            {% endif %}
+
+            <h3 class="product-name">{{ block.settings.name }}</h3>
+            <p class="product-description">{{ block.settings.description }}</p>
+
+            {% if block.settings.show_rating %}
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                {% if block.settings.review_count != blank %}
+                  <span class="review-count">({{ block.settings.review_count }} reviews)</span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if block.settings.features != blank %}
+              <ul class="product-features">
+                {% assign feature_list = block.settings.features | split: '|' %}
+                {% for feature in feature_list %}
+                  <li>{{ feature | strip }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <div class="product-price-row">
+              {% if block.settings.price_old != blank %}
+                <span class="price-old">£{{ block.settings.price_old }}</span>
+              {% endif %}
+              <span class="price-new">£{{ block.settings.price_new }}</span>
+              {% if block.settings.save_text != blank %}
+                <span class="price-save">SAVE £{{ block.settings.save_text }}</span>
+              {% endif %}
+            </div>
+
+            <a href="{{ routes.cart_url }}"
+               class="btn-buy"
+               data-affiliate-buy="true"
+               data-product-id="{{ block.settings.external_product_id }}"
+               data-product-name="{{ block.settings.name | escape }}"
+               data-product-price="{{ block.settings.price_new }}"
+               data-product-image="{{ img_src }}">
+              Buy Now
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Affiliate Products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Our Bestsellers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your Treatment" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Powerful formulations designed to restore your natural hair colour. Free UK delivery on every order over £50." }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Affiliate Product",
+      "settings": [
+        { "type": "header", "content": "Affiliate Link" },
+        { "type": "text", "id": "external_product_id", "label": "External product ID", "info": "The ID used in the affiliate URL: ?add-to-cart=[ID]", "default": "9823" },
+        { "type": "header", "content": "Display" },
+        { "type": "image_picker", "id": "image", "label": "Product image (upload)" },
+        { "type": "url", "id": "external_image_url", "label": "External image URL", "info": "Use a URL from forgetwhite.com if you don't upload an image" },
+        { "type": "text", "id": "default_image_asset", "label": "Default asset filename", "info": "Used as fallback. E.g., product-phytokeratine.png" },
+        { "type": "checkbox", "id": "featured", "label": "Featured (gold border)", "default": false },
+        { "type": "text", "id": "badge_text", "label": "Badge text", "default": "SALE" },
+        { "type": "select", "id": "badge_style", "label": "Badge style",
+          "options": [
+            { "value": "sale", "label": "Sale (green)" },
+            { "value": "bestseller", "label": "Bestseller (red)" },
+            { "value": "gold", "label": "Premium (gold)" }
+          ],
+          "default": "sale"
+        },
+        { "type": "text", "id": "discount_text", "label": "Discount label", "default": "-25%" },
+        { "type": "text", "id": "category", "label": "Category text", "default": "HAIR CARE" },
+        { "type": "text", "id": "name", "label": "Product name", "default": "Phytokeratine Set" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Description here" },
+        { "type": "header", "content": "Rating" },
+        { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+        { "type": "text", "id": "review_count", "label": "Review count", "default": "2,341" },
+        { "type": "header", "content": "Features list" },
+        { "type": "textarea", "id": "features", "label": "Features (separate with |)", "default": "Feature 1 | Feature 2 | Feature 3" },
+        { "type": "header", "content": "Pricing" },
+        { "type": "text", "id": "price_old", "label": "Original price (£)", "default": "79.99" },
+        { "type": "text", "id": "price_new", "label": "Sale price (£)", "default": "59.99" },
+        { "type": "text", "id": "save_text", "label": "Savings amount (£)", "default": "20" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    { "name": "Affiliate Products" }
+  ]
+}
+{% endschema %}

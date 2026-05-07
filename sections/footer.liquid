@@ -1,0 +1,87 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="site-logo" style="color: white;">
+          <span class="logo-mark" style="background: white; color: #1a1a1a;">F</span>
+          <span style="color: white;">FORGET<span style="color: rgba(255,255,255,0.7); font-weight: 300;">WHITE</span></span>
+        </div>
+        <p>{{ section.settings.brand_description }}</p>
+      </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'menu' %}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            <h5>{{ block.settings.heading }}</h5>
+            <ul>
+              {% if block.settings.menu != blank %}
+                {% for link in block.settings.menu.links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              {% endif %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="footer-bottom">
+      <div>{{ section.settings.copyright_text }}</div>
+      <div style="display: flex; gap: 8px;">
+        <span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700;">VISA</span>
+        <span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700;">MC</span>
+        <span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700;">AMEX</span>
+        <span style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700;">PAYPAL</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Brand description",
+      "default": "The UK's leading natural treatment for grey hair reversal. Trusted by 50,000+ customers."
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2026 Forget White UK · All rights reserved · Affiliate partner of forgetwhite.com"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "menu" },
+        { "type": "menu" },
+        { "type": "menu" }
+      ]
+    }
+  ]
+}
+{% endschema %}
