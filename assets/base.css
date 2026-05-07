@@ -10,7 +10,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1a1a1a;
-  background-color: #e5e5e5;
+  background-color: #f0f0f0;
   line-height: 1.6;
   overflow-x: hidden;
 }
